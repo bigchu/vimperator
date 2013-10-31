@@ -1,0 +1,82 @@
+"-------------------------------------------------------------------------------
+" vimperator
+"-------------------------------------------------------------------------------
+noremap ; :
+noremap : ;
+
+set gui=none
+
+
+" ----------------------------------------------------------------
+" maping
+" ----------------------------------------------------------------
+" 選択文字列をクリップボードへにコピー
+map <C-c> Y
+
+
+" j/k でのスクロール幅を 1行 から 8行 に変更
+map j 4<C-e>
+map k 4<C-y>
+
+
+" 選択文字列のgoogle検索を <C-g> に割り当て
+map <C-g> YP
+
+
+" Bckspace を「上のディレクトリに移動」に割り当て
+map <BS> gu
+
+
+
+" h/l に戻るや進むを割り当て
+map h <A-Left>
+map l <A-Right>
+
+
+" J/Kでタブ移動
+map H gT
+map L gt
+
+
+" Shift + ↑↓でタブ位置変更
+map <S-Right> :tabmove! +1<CR>
+map <S-Left>  :tabmove! -1<CR>
+
+
+"<C-r>で再起動
+" map <C-r> :restart<CR>
+
+
+
+" color
+colorscheme darkness2
+
+
+
+"" hatenabookmark
+" [https://github.com/hatena/hatena-bookmark-xul/wiki/Vimperator-%E3%81%A7%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%8B%A1%E5%BC%B5%E3%82%92%E4%BD%BF%E3%81%86](https://github.com/hatena/hatena-bookmark-xul/wiki/Vimperator-%E3%81%A7%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%8B%A1%E5%BC%B5%E3%82%92%E4%BD%BF%E3%81%86)
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+nnoremap s :hbt<Space>
+nnoremap S :hbtc<Space>
+set complete+=H
+
+
+set editor=set editor='/usr/bin/mvim -f'
+
+
+
+" evernote
+" command clip javascript Evernote.Overlay.init(null)
+command clip javascript evernote_doAction()
+" command live javascript ToggleButton.update()
+
+
+" copy.js
+javascript <<EOM
+  liberator.globalVariables.copy_templates = [
+    { label: 'title', value: '%TITLE%' },
+    { label: 'plain', value: '%TITLE% %URL%' },
+    { label: 'anchor', value: '<a href="%URL%">%TITLE%</a>' },
+    { label: 'markdown', value: '[%TITLE%](%URL%)' },
+  ];
+EOM
